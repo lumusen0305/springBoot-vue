@@ -12,8 +12,8 @@ public class AccountJPA {
     @Column(name="email")
     private String email;
 
-    @Column(name="name")
-    private String name;
+    @Column(name="username")
+    private String username;
 
     @Column(name="phone")
     private String phone;
@@ -38,11 +38,11 @@ public class AccountJPA {
     }
 
     public String getName() {
-        return name;
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String username) {
+        this.username = username;
     }
 
     public String getPhone() {

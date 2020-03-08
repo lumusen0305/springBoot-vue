@@ -12,7 +12,10 @@ public interface AccountRepository extends JpaRepository<AccountJPA, Integer> {
     List<AccountJPA> findAll();
 
     @Query(value = "select * from account b where b.email= :email and b.password= :password", nativeQuery = true)
-    List<AccountJPA> findByNameAndPassword(@Param("email") String email,@Param("password") String password);
+    List<AccountJPA> findByEmailAndPassword(@Param("email") String email,@Param("password") String password);
+
+    @Query(value = "select * from account b where b.username= :username and b.password= :password", nativeQuery = true)
+    List<AccountJPA> findByNameAndPassword(@Param("username") String username,@Param("password") String password);
 
 
     @Query(value = "select * from account b where b.email=?1", nativeQuery = true)
