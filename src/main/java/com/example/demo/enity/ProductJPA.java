@@ -22,6 +22,52 @@ public class ProductJPA {
     @Column(name="name")
     private String name;
 
+    @Column(name="productdescription")
+    private String productdescription;
+
+    @Column(name="love")
+    private String love;
+
+    @Column(name="gender")
+    private String gender;
+
+
+    @Column(name="age")
+    private String age;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getProductdescription() {
+        return productdescription;
+    }
+
+    public void setProductdescription(String productdescription) {
+        this.productdescription = productdescription;
+    }
+
+    public String getLove() {
+        return love;
+    }
+
+    public void setLove(String love) {
+        this.love = love;
+    }
+
     public int getId() {
         return id;
     }

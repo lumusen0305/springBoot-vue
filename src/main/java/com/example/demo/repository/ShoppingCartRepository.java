@@ -13,8 +13,6 @@ public interface ShoppingCartRepository  extends JpaRepository<ShoppingCartJPA, 
     List<ShoppingCartJPA> findAll();
 
     @Query(value = "select * from shoppingcart b where b.account=?1", nativeQuery = true)
-List<ShoppingCartJPA> findByAccount(String account);
+    List<ShoppingCartJPA> findByAccount(@Param("account") String account);
 
-    @Query(value = "DELETE FROM shoppingcart b WHERE b.account= :account AND b.name= :name", nativeQuery = true)
-    List<AccountJPA> deleteByAccountAndName(@Param("account") String account,@Param("name") String name);
 }

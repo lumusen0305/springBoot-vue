@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+import javax.servlet.http.Cookie;
 
 import com.example.demo.enity.AccountJPA;
 import com.example.demo.enity.Captcha;
@@ -6,6 +7,9 @@ import com.example.demo.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.apply.email;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,18 +34,24 @@ public class AccountController extends email{
         else {
             result = accountRepository.findByNameAndPassword(name, password);
         }
-        System.out.println(result);
         if(result.isEmpty()){
             return false;
         }else{
             return true;
         }
+
     }
+
+
+
+
+
+
     @PostMapping("/save")
     public boolean save(@RequestParam("password") String password,@RequestParam("email") String email,@RequestParam("phone") String phone,@RequestParam("username") String username){
         AccountJPA accountJPA=new AccountJPA();
         accountJPA.setEmail(email);
-        accountJPA.setName(username);
+        accountJPA.setUsername(username);
         accountJPA.setPassword(password);
         accountJPA.setPhone(phone);
         AccountJPA result = accountRepository.save(accountJPA);
@@ -60,6 +70,7 @@ public class AccountController extends email{
         }else{
             return false;
         }
+
     }
     @PostMapping("/generatecaptcha")
     public void generatecaptcha(@RequestParam("email") String email){
@@ -79,6 +90,33 @@ public class AccountController extends email{
 
         System.out.println(contains(captchaList,userCaptcha1));
 
+    }
+
+    @RequestMapping(value = "/getCookies",method = RequestMethod.GET)
+    public  String getCookies(HttpServletRequest request){
+        //HttpServletRequest 装请求信息类
+        //HttpServletRespionse 装相应信息的类
+        //   Cookie cookie=new Cookie("sessionId","CookieTestInfo");
+        Cookie[] cookies =  request.getCookies();
+        if(cookies != null){
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals("username")){
+                    String  name=cookie.getValue();
+                    return cookie.getValue();
+                }
+            }
+        }
+
+        return  null;
+    }
+
+    @RequestMapping(value = "/setCookies",method = RequestMethod.GET)
+    public  String setCookies(@RequestParam("username") String name,HttpServletResponse response){
+        //HttpServerletRequest 装请求信息类
+        //HttpServerletRespionse 装相应信息的类
+        Cookie cookie=new Cookie("username",name);
+        response.addCookie(cookie);
+        return "添加"+name+"信息成功";
     }
     public boolean isEmail(String email){
         int result1 = email.indexOf("@");

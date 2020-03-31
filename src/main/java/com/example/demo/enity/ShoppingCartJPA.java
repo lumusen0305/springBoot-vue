@@ -9,16 +9,17 @@ public class ShoppingCartJPA {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="name")
-    private String name;
+    @Column(name = "product")
+    private String product;
 
-    @Column(name="account")
+    @Column(name = "account")
     private String account;
 
-    @Column(name="category")
-    private String category;
-    @Column(name="figure")
+    @Column(name = "figure")
     private String figure;
+
+    @Column(name = "shoptime")
+    private String shoptime;
 
     public int getId() {
         return id;
@@ -28,12 +29,12 @@ public class ShoppingCartJPA {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProduct() {
+        return product;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProduct(String product) {
+        this.product = product;
     }
 
     public String getAccount() {
@@ -44,14 +45,6 @@ public class ShoppingCartJPA {
         this.account = account;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public String getFigure() {
         return figure;
     }
@@ -59,4 +52,14 @@ public class ShoppingCartJPA {
     public void setFigure(String figure) {
         this.figure = figure;
     }
+
+    public String getShoptime() {
+        return shoptime;
+    }
+
+    public void setShoptime(String shoptime) {
+        this.shoptime = shoptime;
+    }
 }
+
+

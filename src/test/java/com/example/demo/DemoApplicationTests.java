@@ -1,12 +1,17 @@
 package com.example.demo;
 
+import com.alibaba.fastjson.JSON;
 import com.example.demo.enity.BookJPA;
 import com.example.demo.repository.BookRepository;
+import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -17,19 +22,14 @@ class DemoApplicationTests {
     @Autowired
     private BookRepository bookRepository;
 
-    @Test
-    void contextLoad(){
-        PageRequest pageRequest = PageRequest.of(0,3);
-        Page<BookJPA> page=bookRepository.findAll(pageRequest);
-        System.out.println(page);
-    }
+
+
+
+
     @Test
     void save(){
-        BookJPA bookJPA = new BookJPA();
-        bookJPA.setAuthor("大肌肌大俠");
-        bookJPA.setName("肌肌大俠的50種肌肌");
-        BookJPA book1=bookRepository.save(bookJPA);
-        System.out.println(book1);
+
+        System.out.println("book1");
     }
     @Test
     void findById(){

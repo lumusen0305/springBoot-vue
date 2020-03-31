@@ -20,25 +20,25 @@ public class ShoppingCartController {
 
     @Autowired
     DataSource dataSource;
-
-    //查
-    @PostMapping("/order/{account)")
-    public List<ShoppingCartJPA> findByAccount(@PathVariable("account") String account){
-        List<ShoppingCartJPA> result =shoppingCartRepository.findByAccount(account);
+    @PostMapping("/save")
+    public boolean save(@RequestParam("username") String username,@RequestParam("product") String product,@RequestParam("figure") String figure){
+        ShoppingCartJPA shoppingCartJPA=new ShoppingCartJPA();
+        shoppingCartJPA.setAccount(username);
+        shoppingCartJPA.setProduct(product);
+        shoppingCartJPA.setFigure(figure);
+       ShoppingCartJPA result = shoppingCartRepository.save(shoppingCartJPA);
         if(result != null){
-            return result;
+            return true;
         }else{
-            return result;
+            return false;
         }
     }
-    //刪
-    @DeleteMapping("deleteByAccountAndName/{account}/{name}")
-    public void deleteByAccountAndName(@PathVariable("account") String account,@PathVariable("name") String name) {
-        shoppingCartRepository.deleteByAccountAndName(account,name);
-    }
-    //增
-    @PostMapping("/save")
-    public boolean save(@RequestBody ShoppingCartJPA shoppingCartJPA){
+    @PutMapping("/update")
+    public boolean update(@RequestParam("username") String username,@RequestParam("product") String product,@RequestParam("figure") String figure){
+        ShoppingCartJPA shoppingCartJPA=new ShoppingCartJPA();
+        shoppingCartJPA.setAccount(username);
+        shoppingCartJPA.setProduct(product);
+        shoppingCartJPA.setFigure(figure);
         ShoppingCartJPA result = shoppingCartRepository.save(shoppingCartJPA);
         if(result != null){
             return true;
@@ -46,16 +46,16 @@ public class ShoppingCartController {
             return false;
         }
     }
-    //改
-
-    @PutMapping("/update")
-    public boolean update(@RequestBody ShoppingCartJPA book){
-        ShoppingCartJPA result = shoppingCartRepository.save(book);
-        if(result != null){
-            return true;
-        }else{
+    //查
+    @PostMapping("/order")
+    public boolean order(@RequestParam("username") String username) {
+        List<ShoppingCartJPA> result = null;
+        System.out.println(username);
+        result = shoppingCartRepository.findByAccount(username);
+        if(result.isEmpty()){
             return false;
+        }else{
+            return true;
         }
     }
 }
-

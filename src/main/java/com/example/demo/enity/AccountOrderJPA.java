@@ -9,16 +9,17 @@ public class AccountOrderJPA {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="name")
-    private String name;
+    @Column(name = "productid")
+    private String productid;
 
-    @Column(name="account")
+    @Column(name = "account")
     private String account;
 
-    @Column(name="category")
-    private String category;
-    @Column(name="figure")
+    @Column(name = "figure")
     private String figure;
+
+    @Column(name = "shoptime")
+    private String shoptime;
 
     public int getId() {
         return id;
@@ -28,12 +29,12 @@ public class AccountOrderJPA {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductid() {
+        return productid;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductid(String productid) {
+        this.productid = productid;
     }
 
     public String getAccount() {
@@ -44,14 +45,6 @@ public class AccountOrderJPA {
         this.account = account;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public String getFigure() {
         return figure;
     }
@@ -59,6 +52,15 @@ public class AccountOrderJPA {
     public void setFigure(String figure) {
         this.figure = figure;
     }
+
+    public String getShoptime() {
+        return shoptime;
+    }
+
+    public void setShoptime(String shoptime) {
+        this.shoptime = shoptime;
+    }
 }
 
         ;
+

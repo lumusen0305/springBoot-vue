@@ -20,8 +20,8 @@ public class ProductController {
     DataSource dataSource;
 
     @GetMapping("/findAll")
-    public List<ProductJPA> findById(){
-        List<ProductJPA> productJPAList = productRepository.findAll();
+    public List<ProductJPA> findBy(){
+        List<ProductJPA> productJPAList = productRepository.findAllByNull();
         return productJPAList;
     }
 }

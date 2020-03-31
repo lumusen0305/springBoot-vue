@@ -21,11 +21,22 @@ public class AccountJPA {
     @Column(name="password")
     private String password;
 
-    public int getUserId() {
+    @Column(name="cash")
+    private String cash;
+
+    @Column(name="description")
+    private String description;
+
+    @Column(name="address")
+    private String address;
+
+
+
+    public int getId() {
         return id;
     }
 
-    public void setUserId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -37,11 +48,11 @@ public class AccountJPA {
         this.email = email;
     }
 
-    public String getName() {
+    public String getUsername() {
         return username;
     }
 
-    public void setName(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -59,6 +70,30 @@ public class AccountJPA {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCash() {
+        return cash;
+    }
+
+    public void setCash(String cash) {
+        this.cash = cash;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
 

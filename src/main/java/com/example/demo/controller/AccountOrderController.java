@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.enity.AccountOrderJPA;
 import com.example.demo.enity.AccountOrderJPA;
+import com.example.demo.enity.ShoppingCartJPA;
 import com.example.demo.repository.AccountOrderRepository;
 import com.example.demo.repository.AccountRepository;
 import com.example.demo.repository.ShoppingCartRepository;
@@ -21,39 +22,16 @@ public class AccountOrderController {
     DataSource dataSource;
 
     //查
-    @PostMapping("/order/{account)")
-    public List<AccountOrderJPA> findByAccount(@PathVariable("account") String account){
-        List<AccountOrderJPA> result =accountOrderRepository.findByAccount(account);
-        if(result != null){
-            return result;
-        }else{
-            return result;
-        }
-    }
-    //刪
-    @DeleteMapping("deleteByAccountAndName/{account}/{name}")
-    public void deleteByAccountAndName(@PathVariable("account") String account,@PathVariable("name") String name) {
-        accountOrderRepository.deleteByAccountAndName(account,name);
-    }
-    //增
-    @PostMapping("/save")
-    public boolean save(@RequestBody AccountOrderJPA accountOrderJPA){
-        AccountOrderJPA result = accountOrderRepository.save(accountOrderJPA);
-        if(result != null){
-            return true;
-        }else{
+    @PostMapping("/order")
+    public boolean order(@RequestParam("username") String username) {
+        List<AccountOrderJPA> result = null;
+        System.out.println(username);
+        result = accountOrderRepository.findByAccount(username);
+        if(result.isEmpty()){
             return false;
-        }
-    }
-    //改
-
-    @PutMapping("/update")
-    public boolean update(@RequestBody AccountOrderJPA book){
-        AccountOrderJPA result = accountOrderRepository.save(book);
-        if(result != null){
-            return true;
         }else{
-            return false;
+            return true;
         }
     }
 }
+

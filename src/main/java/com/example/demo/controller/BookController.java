@@ -20,9 +20,9 @@ public class BookController {
     @Autowired
     DataSource dataSource;
 
-        @GetMapping("/findAll/{page}/{size}")
-        public Page<BookJPA> findAll(@PathVariable("page") Integer page, @PathVariable("size") Integer size){
-            PageRequest request = PageRequest.of(page,size);
+        @PostMapping("/findAll")
+        public Page<BookJPA> findAll(@RequestBody int page){
+            PageRequest request = PageRequest.of(page,1);
             return bookRepository.findAll(request);
         }
 

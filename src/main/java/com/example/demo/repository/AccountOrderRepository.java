@@ -11,10 +11,7 @@ import java.util.List;
 
 public interface AccountOrderRepository  extends JpaRepository<AccountOrderJPA, Integer> {
     List<AccountOrderJPA> findAll();
-    @Query(value = "select * from accountorder b where b.account=?1", nativeQuery = true)
-    List<AccountOrderJPA> findByAccount(String account);
 
-    void deleteByName(Integer id);
-    @Query(value = "DELETE FROM accountorder b WHERE b.account= :account AND b.name= :name", nativeQuery = true)
-    List<AccountOrderJPA> deleteByAccountAndName(@Param("account") String account, @Param("name") String name);
+    @Query(value = "select * from accountorder b where b.account=?1", nativeQuery = true)
+    List<AccountOrderJPA> findByAccount(String username);
 }
