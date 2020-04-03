@@ -10,6 +10,7 @@ import com.example.demo.apply.email;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,8 @@ public class AccountController extends email{
 
     public List<Captcha> captchaList=new ArrayList<Captcha>();
     @PostMapping("/check")
-    public boolean check(@RequestParam("name") String name,@RequestParam("password") String password) {
+    public boolean check(@RequestParam("name") String name, @RequestParam("password") String password) {
+        List<AccountJPA> AccountJPAList = new ArrayList<AccountJPA>();
         List<AccountJPA> result = null;
         if (isEmail(name)){
             result = accountRepository.findByEmailAndPassword(name, password);
