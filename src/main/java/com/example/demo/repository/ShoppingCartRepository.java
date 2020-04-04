@@ -19,7 +19,7 @@ public interface ShoppingCartRepository  extends JpaRepository<ShoppingCartJPA, 
 
     @Modifying
     @Transactional
-    @Query(value = "delete from shoppingcart b where b.account=?1 and b.product=?2", nativeQuery = true)
+    @Query(value = "delete from shoppingcart b where b.account= :account and b.product= :product", nativeQuery = true)
     int deleteByAccountAndProduct(@Param("account") String account,@Param("product") String product);
 
 }

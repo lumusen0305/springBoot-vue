@@ -9,8 +9,8 @@ public class AccountOrderJPA {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "productid")
-    private String productid;
+    @Column(name = "product")
+    private String product;
 
     @Column(name = "account")
     private String account;
@@ -29,12 +29,12 @@ public class AccountOrderJPA {
         this.id = id;
     }
 
-    public String getProductid() {
-        return productid;
+    public String getProduct() {
+        return product;
     }
 
-    public void setProductid(String productid) {
-        this.productid = productid;
+    public void setProduct(String produc) {
+        this.product = produc;
     }
 
     public String getAccount() {

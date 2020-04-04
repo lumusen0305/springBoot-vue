@@ -48,7 +48,6 @@ public class AccountController extends email{
 
 
 
-
     @PostMapping("/save")
     public boolean save(@RequestParam("password") String password,@RequestParam("email") String email,@RequestParam("phone") String phone,@RequestParam("username") String username){
         AccountJPA accountJPA=new AccountJPA();
@@ -74,6 +73,7 @@ public class AccountController extends email{
         }
 
     }
+    //生驗證碼
     @PostMapping("/generatecaptcha")
     public void generatecaptcha(@RequestParam("email") String email){
         Captcha captcha=new Captcha();
@@ -84,6 +84,7 @@ public class AccountController extends email{
         send(email,code);
         System.out.println(code);
     }
+    //確認驗證碼
     @PostMapping("/checkcaptcha")
     public void getcaptcha(@RequestParam("email") String email,@RequestParam("captcha") String captcha){
         Captcha userCaptcha1=new Captcha();

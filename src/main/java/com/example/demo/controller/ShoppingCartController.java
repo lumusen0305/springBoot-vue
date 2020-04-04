@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.enity.AccountOrderJPA;
 import com.example.demo.enity.ShoppingCartJPA;
 import com.example.demo.repository.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +26,7 @@ public class ShoppingCartController {
         List<ShoppingCartJPA> result = null;
         System.out.println(username);
         result = shoppingCartRepository.findByAccount(username);
-        if(result.isEmpty()){
-            return false;
-        }else{
-            return result;
-        }
+        return result;
     }
 
     //增
@@ -66,8 +63,11 @@ public class ShoppingCartController {
 
     //刪
     @DeleteMapping("/delete")
-    public int delete(@RequestParam("username") String username,@RequestParam("product") String product,@RequestParam("figure") String figure) {
-        return shoppingCartRepository.deleteByAccountAndProduct(username,product);
+    public void delete(@RequestBody List<ShoppingCartJPA> shoppingCartJPAS) {
+        int count = shoppingCartJPAS.size();
+        for (int i=0;i<count;i++){
+            shoppingCartRepository.deleteByAccountAndProduct(shoppingCartJPAS.get(i).getAccount(),shoppingCartJPAS.get(i).getProduct());
+        }
     }
     public String getDateTime(){
         SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");

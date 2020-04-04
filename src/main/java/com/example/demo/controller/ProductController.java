@@ -1,11 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.enity.BookJPA;
 import com.example.demo.enity.ProductJPA;
 import com.example.demo.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -23,6 +22,24 @@ public class ProductController {
     public List<ProductJPA> findBy(){
         List<ProductJPA> productJPAList = productRepository.findAllByNull();
         return productJPAList;
+    }
+    @PostMapping("/save")
+    public String save(@RequestBody ProductJPA productJPA){
+        ProductJPA result = productRepository.save(productJPA);
+        if(result != null){
+            return "success";
+        }else{
+            return "error";
+        }
+    }
+    @PutMapping("/update")
+    public String update(@RequestBody ProductJPA productJPA){
+        ProductJPA result = productRepository.save(productJPA);
+        if(result != null){
+            return "success";
+        }else{
+            return "error";
+        }
     }
 }
 
