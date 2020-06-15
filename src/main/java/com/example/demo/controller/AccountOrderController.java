@@ -1,13 +1,8 @@
 package com.example.demo.controller;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.example.demo.enity.*;
 import com.example.demo.enity.AccountOrderJPA;
-import com.example.demo.enity.AccountOrderJPA;
-import com.example.demo.enity.ShoppingCartJPA;
 import com.example.demo.repository.AccountOrderRepository;
-import com.example.demo.repository.AccountRepository;
-import com.example.demo.repository.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,67 +20,52 @@ public class AccountOrderController {
     @Autowired
     DataSource dataSource;
 
-    //增
-//    @PostMapping("/save")
-//    public boolean save(@RequestParam("username") String username,@RequestParam("product") String product,@RequestParam("figure") String figure){
-//        AccountOrderJPA accountOrderJPA=new AccountOrderJPA();
-//        accountOrderJPA.setAccount(username);
-//        accountOrderJPA.setProduct(product);
-//        accountOrderJPA.setFigure(figure);
-//        accountOrderJPA.setShoptime(getDateTime());
-//        AccountOrderJPA result = accountOrderRepository.save(accountOrderJPA);
-//        if(result != null){
-//            return true;
-//        }else{
-//            return false;
-//        }
-//    }
     @PostMapping("/save")
-    public void save(@RequestBody List<AccountOrderJPA> accountOrderJPAS){
+    public BaseResult<? extends Object> save(@RequestBody List<AccountOrderJPA> accountOrderJPAS){
         int count = accountOrderJPAS.size();
+        AccountOrderJPA result = null;
         for (int i=0;i<count;i++){
             AccountOrderJPA temp=new AccountOrderJPA();
             accountOrderJPAS.get(i).setShoptime(getDateTime());
             temp=accountOrderJPAS.get(i);
-            accountOrderRepository.save(temp);
+            result = accountOrderRepository.save(temp);
         }
-//                for(AccountOrderJPA user:accountOrderJPAS){
-//                    AccountOrderJPA tempJPA=new AccountOrderJPA();
-//                    tempJPA.setAccount(user.getAccount());
-//                    tempJPA.setFigure(user.getFigure());
-//                    tempJPA.setProduct(user.getProduct());
-//                    tempJPA.setShoptime(getDateTime());
-//                    System.out.println(tempJPA);
-//                    System.out.println(accountOrderJPAS);
-//
-//                    accountOrderRepository.save(tempJPA);
-//                }
-        }
-    @PostMapping("/test")
-    public boolean save(@RequestParam("username") String username,@RequestParam("product") String product,@RequestParam("figure") String figure){
-        AccountOrderJPA shoppingCartJPA=new AccountOrderJPA();
-        shoppingCartJPA.setAccount(username);
-        shoppingCartJPA.setProduct(product);
-        shoppingCartJPA.setFigure(figure);
-        shoppingCartJPA.setShoptime(getDateTime());
-        AccountOrderJPA result = accountOrderRepository.save(shoppingCartJPA);
         if(result != null){
-            return true;
+            return ResultUtil.success(true);
         }else{
-            return false;
+            return ResultUtil.error("註冊失敗");
         }
     }
+//    @PostMapping("/changStatue")
+
+
 
     //查
     @PostMapping("/order")
-    public boolean order(@RequestParam("username") String username) {
+    public BaseResult<Object> order(@RequestBody AccountOrderJPA accountOrderJPA) {
         List<AccountOrderJPA> result = null;
-        System.out.println(username);
-        result = accountOrderRepository.findByAccount(username);
+        result = accountOrderRepository.findByAccount(accountOrderJPA.getAccount());
         if(result.isEmpty()){
-            return false;
+            return ResultUtil.error("查詢失敗");
         }else{
-            return true;
+            return ResultUtil.success(result);
+        }
+    }
+
+    @PutMapping("/changeStatue")
+    public BaseResult<Object> changeStatue(@RequestBody AccountOrderJPA accountOrderJPA) {
+        AccountOrderJPA result = null;
+        result = accountOrderRepository.findById(accountOrderJPA.getId());
+        if(result==null){
+            return ResultUtil.error("查無此訂單修改無效");
+        }else{
+            result.setOrderstatue(accountOrderJPA.getOrderstatue());
+            AccountOrderJPA resultSave = accountOrderRepository.save(result);
+            if(result != null){
+                return ResultUtil.success("訂單狀態以更改為："+accountOrderJPA.getOrderstatue());
+            }else{
+                return ResultUtil.error("訂單狀態變動失敗");
+            }
         }
     }
     public String getDateTime(){

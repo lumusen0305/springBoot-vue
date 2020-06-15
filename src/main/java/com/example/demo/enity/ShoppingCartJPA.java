@@ -21,6 +21,28 @@ public class ShoppingCartJPA {
     @Column(name = "shoptime")
     private String shoptime;
 
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "age")
+    private String age;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
     public int getId() {
         return id;
     }

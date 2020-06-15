@@ -3,6 +3,8 @@ package com.example.demo.enity;
 import javax.persistence.*;
 
 @Entity
+
+
 @Table(name = "account")
 public class AccountJPA {
     @Id
@@ -30,7 +32,49 @@ public class AccountJPA {
     @Column(name="address")
     private String address;
 
+    @Column(name="backgroudcolor")
+    private String backgroudcolor;
 
+    @Column(name="backgroudurl")
+    private String backgroudurl;
+
+    @Column(name="avatar")
+    private String avatar;
+
+    @Column(name="power")
+    private String power;
+
+    public String getPower() {
+        return power;
+    }
+
+    public void setPower(String power) {
+        this.power = power;
+    }
+
+    public String getBackgroudcolor() {
+        return backgroudcolor;
+    }
+
+    public void setBackgroudcolor(String backgroudcolor) {
+        this.backgroudcolor = backgroudcolor;
+    }
+
+    public String getBackgroudurl() {
+        return backgroudurl;
+    }
+
+    public void setBackgroudurl(String backgroudurl) {
+        this.backgroudurl = backgroudurl;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public int getId() {
         return id;

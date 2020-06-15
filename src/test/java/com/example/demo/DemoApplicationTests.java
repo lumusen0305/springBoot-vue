@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.example.demo.enity.BookJPA;
 import com.example.demo.repository.BookRepository;
 import net.minidev.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +18,8 @@ import org.springframework.web.client.RestTemplate;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 @SpringBootTest
 class DemoApplicationTests {
@@ -27,9 +31,16 @@ class DemoApplicationTests {
 
 
     @Test
-    void save(){
+    void save() throws JSONException {
+        Map<String, String> map1 = new HashMap<String, String>();
+        map1.put("name", "Alexia");
+        map1.put("sex", "female");
+        map1.put("age", "23");
+        JSONArray jo = new JSONArray();
+        jo.put(map1);
+        jo.put(map1);
 
-        System.out.println("book1");
+        System.out.println( jo);
     }
     @Test
     void findById(){

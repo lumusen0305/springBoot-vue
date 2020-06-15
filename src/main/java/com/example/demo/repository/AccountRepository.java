@@ -19,6 +19,9 @@ public interface AccountRepository extends JpaRepository<AccountJPA, Integer> {
 
 
     @Query(value = "select * from account b where b.email=?1", nativeQuery = true)
-    List<AccountJPA> findByAccount(String email);
+    List<AccountJPA> findByEmail(String email);
+
+    @Query(value = "select * from account b where b.username=?1", nativeQuery = true)
+    List<AccountJPA> findByAccount(String username);
 
 }

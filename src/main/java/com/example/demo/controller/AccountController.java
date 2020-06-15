@@ -2,15 +2,17 @@ package com.example.demo.controller;
 import javax.servlet.http.Cookie;
 
 import com.example.demo.enity.AccountJPA;
+import com.example.demo.enity.BaseResult;
 import com.example.demo.enity.Captcha;
+import com.example.demo.enity.ResultUtil;
 import com.example.demo.repository.AccountRepository;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.apply.email;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,101 +28,116 @@ public class AccountController extends email{
     DataSource dataSource;
 
     public List<Captcha> captchaList=new ArrayList<Captcha>();
-    @PostMapping("/check")
-    public boolean check(@RequestParam("name") String name, @RequestParam("password") String password) {
+    @PostMapping("/login")
+    public BaseResult<Object> check(@RequestBody AccountJPA accountJPA){
         List<AccountJPA> AccountJPAList = new ArrayList<AccountJPA>();
         List<AccountJPA> result = null;
-        if (isEmail(name)){
-            result = accountRepository.findByEmailAndPassword(name, password);
+        if (isEmail(accountJPA.getUsername())){
+            result = accountRepository.findByEmailAndPassword(accountJPA.getUsername(), accountJPA.getPassword());
         }
         else {
-            result = accountRepository.findByNameAndPassword(name, password);
+            result = accountRepository.findByNameAndPassword(accountJPA.getUsername(), accountJPA.getPassword());
         }
         if(result.isEmpty()){
-            return false;
+            return ResultUtil.error("帳號密碼錯誤");
         }else{
-            return true;
+            return ResultUtil.success(result);
         }
 
     }
+    @PostMapping("/checkUsername")
+    public BaseResult<Object> checkUsername(@RequestBody AccountJPA accountJPA) throws JSONException {
+        List<AccountJPA> result = null;
+        result = accountRepository.findByAccount(accountJPA.getUsername());
+        if(result.size()==0){
+            return ResultUtil.success(true);
+        }else{
+            return ResultUtil.success(false);
+        }
+    }
+    @PostMapping("/checkEmail")
+    public BaseResult<Object> checkEmail(@RequestBody AccountJPA accountJPA)  {
+        List<AccountJPA> result = null;
+        result = accountRepository.findByEmail(accountJPA.getUsername());
+        if(result.size()==0){
+            return ResultUtil.success(true);
+        }else{
+            return ResultUtil.success(false);
+        }
+    }
 
+    @GetMapping("/findAll")
+    public BaseResult<Object> findBy() throws JSONException {
+        List<AccountJPA> result = null;
+        result = accountRepository.findAll();
+        if(result.isEmpty()){
+            return ResultUtil.error("ERRO");
+        }else{
+            return ResultUtil.success(result);
+        }
+    }
 
-
-
-
+//    @PostMapping("/save")
+//    public BaseResult<Boolean> save(@RequestParam("password") String password, @RequestParam("email") String email, @RequestParam("phone") String phone, @RequestParam("username") String username){
+//        AccountJPA accountJPA=new AccountJPA();
+//        accountJPA.setEmail(email);
+//        accountJPA.setUsername(username);
+//        accountJPA.setPassword(password);
+//        accountJPA.setPhone(phone);
+//        AccountJPA result = accountRepository.save(accountJPA);
+//        if(result != null){
+//            return ResultUtil.success(true);
+//        }else{
+//            return ResultUtil.error("註冊失敗");
+//        }
+//    }
     @PostMapping("/save")
-    public boolean save(@RequestParam("password") String password,@RequestParam("email") String email,@RequestParam("phone") String phone,@RequestParam("username") String username){
-        AccountJPA accountJPA=new AccountJPA();
-        accountJPA.setEmail(email);
-        accountJPA.setUsername(username);
-        accountJPA.setPassword(password);
-        accountJPA.setPhone(phone);
+    public BaseResult<Boolean> save(@RequestBody AccountJPA accountJPA){
+        accountJPA.setPower("0");
         AccountJPA result = accountRepository.save(accountJPA);
         if(result != null){
-            return true;
+            return ResultUtil.success(true);
         }else{
-            return false;
+            return ResultUtil.error("註冊失敗");
         }
     }
 
     @PutMapping("/update")
-    public boolean update(@RequestBody AccountJPA accountJPA){
+    public BaseResult<Boolean> update(@RequestBody AccountJPA accountJPA){
         AccountJPA result = accountRepository.save(accountJPA);
         if(result != null){
-            return true;
+            return ResultUtil.success(true);
         }else{
-            return false;
+            return ResultUtil.error("註冊失敗");
         }
 
     }
     //生驗證碼
     @PostMapping("/generatecaptcha")
-    public void generatecaptcha(@RequestParam("email") String email){
+    public BaseResult<Boolean> generatecaptcha(@RequestBody AccountJPA accountJPA){
         Captcha captcha=new Captcha();
         String code=Integer.toString((int)(Math.random()*(9999-1000+1)+1000));
         captcha.setCaptcha(code);
-        captcha.setEmail(email);
+        captcha.setEmail(accountJPA.getEmail());
         captchaList.add(captcha);
-        send(email,code);
+        send(accountJPA.getEmail(),code);
         System.out.println(code);
+        return ResultUtil.success(true);
     }
     //確認驗證碼
     @PostMapping("/checkcaptcha")
-    public void getcaptcha(@RequestParam("email") String email,@RequestParam("captcha") String captcha){
+    public BaseResult<String> getcaptcha(@RequestParam("email") String email, @RequestParam("captcha") String captcha){
         Captcha userCaptcha1=new Captcha();
         userCaptcha1.setCaptcha(captcha);
         userCaptcha1.setEmail(email);
-
-        System.out.println(contains(captchaList,userCaptcha1));
-
-    }
-
-    @RequestMapping(value = "/getCookies",method = RequestMethod.GET)
-    public  String getCookies(HttpServletRequest request){
-        //HttpServletRequest 装请求信息类
-        //HttpServletRespionse 装相应信息的类
-        //   Cookie cookie=new Cookie("sessionId","CookieTestInfo");
-        Cookie[] cookies =  request.getCookies();
-        if(cookies != null){
-            for(Cookie cookie : cookies){
-                if(cookie.getName().equals("username")){
-                    String  name=cookie.getValue();
-                    return cookie.getValue();
-                }
-            }
+        if (contains(captchaList,userCaptcha1) == true){
+            return ResultUtil.success("驗證碼正確");
         }
-
-        return  null;
+        else {
+            return ResultUtil.error("驗證碼錯誤");
+        }
     }
 
-    @RequestMapping(value = "/setCookies",method = RequestMethod.GET)
-    public  String setCookies(@RequestParam("username") String name,HttpServletResponse response){
-        //HttpServerletRequest 装请求信息类
-        //HttpServerletRespionse 装相应信息的类
-        Cookie cookie=new Cookie("username",name);
-        response.addCookie(cookie);
-        return "添加"+name+"信息成功";
-    }
     public boolean isEmail(String email){
         int result1 = email.indexOf("@");
         if(result1 != -1){

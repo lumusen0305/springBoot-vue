@@ -28,28 +28,16 @@ public class ProductJPA {
     @Column(name="love")
     private String love;
 
-    @Column(name="gender")
-    private String gender;
+    @Column(name="likenum")
+    private String likenum;
 
 
-    @Column(name="age")
-    private String age;
-
-    public String getGender() {
-        return gender;
+    public String getLikenum() {
+        return likenum;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
+    public void setLikenum(String likenum) {
+        this.likenum = likenum;
     }
 
     public String getProductdescription() {

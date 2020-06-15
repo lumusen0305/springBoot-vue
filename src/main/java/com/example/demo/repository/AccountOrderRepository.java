@@ -14,4 +14,9 @@ public interface AccountOrderRepository  extends JpaRepository<AccountOrderJPA, 
 
     @Query(value = "select * from accountorder b where b.account=?1", nativeQuery = true)
     List<AccountOrderJPA> findByAccount(String username);
+
+    @Query(value = "select * from accountorder b where b.id=?1", nativeQuery = true)
+    AccountOrderJPA findById(int id);
+
+
 }

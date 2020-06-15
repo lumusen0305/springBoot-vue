@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.enity.AccountOrderJPA;
+import com.example.demo.enity.BaseResult;
+import com.example.demo.enity.ResultUtil;
 import com.example.demo.enity.ShoppingCartJPA;
 import com.example.demo.repository.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,52 +23,49 @@ public class ShoppingCartController {
 
     //查
     @PostMapping("/order")
-    public Object order(@RequestParam("username") String username) {
+    public BaseResult<Object> order(@RequestBody ShoppingCartJPA shoppingCartJPA) {
         List<ShoppingCartJPA> result = null;
-        System.out.println(username);
-        result = shoppingCartRepository.findByAccount(username);
-        return result;
+        System.out.println(shoppingCartJPA.getAccount());
+        result = shoppingCartRepository.findByAccount(shoppingCartJPA.getAccount());
+        if(result.isEmpty()){
+            return ResultUtil.error("查詢失敗");
+        }else{
+            return ResultUtil.success(result);
+        }
     }
 
     //增
     @PostMapping("/save")
-    public boolean save(@RequestParam("username") String username,@RequestParam("product") String product,@RequestParam("figure") String figure){
-        ShoppingCartJPA shoppingCartJPA=new ShoppingCartJPA();
-        shoppingCartJPA.setAccount(username);
-        shoppingCartJPA.setProduct(product);
-        shoppingCartJPA.setFigure(figure);
+    public BaseResult<Object> save(@RequestBody ShoppingCartJPA shoppingCartJPA){
         shoppingCartJPA.setShoptime(getDateTime());
        ShoppingCartJPA result = shoppingCartRepository.save(shoppingCartJPA);
         if(result != null){
-            return true;
+            return ResultUtil.success(true);
         }else{
-            return false;
+            return ResultUtil.error("添加失敗");
         }
     }
 
     //改
     @PutMapping("/update")
-    public boolean update(@RequestParam("username") String username,@RequestParam("product") String product,@RequestParam("figure") String figure){
-        ShoppingCartJPA shoppingCartJPA=new ShoppingCartJPA();
-        shoppingCartJPA.setAccount(username);
-        shoppingCartJPA.setProduct(product);
-        shoppingCartJPA.setFigure(figure);
+    public BaseResult<Object> update(@RequestBody ShoppingCartJPA shoppingCartJPA){
         shoppingCartJPA.setShoptime(getDateTime());
         ShoppingCartJPA result = shoppingCartRepository.save(shoppingCartJPA);
         if(result != null){
-            return true;
+            return ResultUtil.success(true);
         }else{
-            return false;
+            return ResultUtil.error("添加失敗");
         }
     }
 
     //刪
     @DeleteMapping("/delete")
-    public void delete(@RequestBody List<ShoppingCartJPA> shoppingCartJPAS) {
+    public BaseResult<Boolean> delete(@RequestBody List<ShoppingCartJPA> shoppingCartJPAS) {
         int count = shoppingCartJPAS.size();
         for (int i=0;i<count;i++){
             shoppingCartRepository.deleteByAccountAndProduct(shoppingCartJPAS.get(i).getAccount(),shoppingCartJPAS.get(i).getProduct());
         }
+        return ResultUtil.success(true);
     }
     public String getDateTime(){
         SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");

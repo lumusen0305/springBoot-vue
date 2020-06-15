@@ -1,0 +1,31 @@
+Arguments: 
+  /usr/bin/node /home/lumusen/.npm-global/bin/yarn apidoc.json
+
+PATH: 
+  /home/lumusen/.pyenv/plugins/pyenv-virtualenv/shims:/home/lumusen/.pyenv/shims:/home/lumusen/.npm-global/bin/:/home/lumusen/.pyenv/bin:/home/lumusen/.oh-my-zsh/custom/plugins/git-open:/home/lumusen/Study/Code/Go//bin:/user/bin/geckodriver:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+
+Yarn version: 
+  1.22.0
+
+Node version: 
+  13.12.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  SyntaxError: /home/lumusen/Study/Code/Java/Web/javaWeb/apidoc/package.json: Unexpected end of JSON input
+      at JSON.parse (<anonymous>)
+      at /home/lumusen/.npm-global/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/home/lumusen/.npm-global/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /home/lumusen/.npm-global/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
