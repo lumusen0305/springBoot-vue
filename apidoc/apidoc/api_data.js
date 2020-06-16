@@ -270,6 +270,76 @@ define({ "api": [
     }
   },
   {
+    "type": "get",
+    "url": "http://35.238.213.70:8081/account/findAll",
+    "title": "查詢所有用戶data",
+    "version": "3.1.0",
+    "name": "FindAll",
+    "group": "Account",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "code",
+            "description": "<p>狀態碼</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>设备状态</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>返回信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data",
+            "description": "<p>返回data</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"status\": 1,\n    \"msg\": \"请求成功\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"email\": null,\n            \"username\": \"1\",\n            \"phone\": null,\n            \"password\": null,\n            \"cash\": null,\n            \"description\": null,\n            \"address\": null,\n            \"backgroudcolor\": null,\n            \"backgroudurl\": null,\n            \"avatar\": null,\n            \"power\": \"0\"\n        },\n        {\n            \"id\": 2,\n            \"email\": null,\n            \"username\": \"1\",\n            \"phone\": null,\n            \"password\": null,\n            \"cash\": null,\n            \"description\": null,\n            \"address\": null,\n            \"backgroudcolor\": null,\n            \"backgroudurl\": null,\n            \"avatar\": null,\n            \"power\": \"0\"\n        },\n        {\n            \"id\": 3,\n            \"email\": null,\n            \"username\": \"1\",\n            \"phone\": null,\n            \"password\": null,\n            \"cash\": null,\n            \"description\": null,\n            \"address\": null,\n            \"backgroudcolor\": null,\n            \"backgroudurl\": null,\n            \"avatar\": null,\n            \"power\": \"0\"\n        },\n        {\n            \"id\": 4,\n            \"email\": null,\n            \"username\": \"1\",\n            \"phone\": null,\n            \"password\": null,\n            \"cash\": null,\n            \"description\": null,\n            \"address\": null,\n            \"backgroudcolor\": null,\n            \"backgroudurl\": null,\n            \"avatar\": null,\n            \"power\": \"0\"\n        }\n    ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/users.js",
+    "groupTitle": "Account",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RkNotFoundException",
+            "description": "<p>找不到相关数据</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": {\n      \"code\": 404,\n      \"msg\": \"\",\n      \"path\" \"\"\n  }\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "post",
     "url": "http://35.238.213.70:8081/account/generatecaptcha",
     "title": "產生驗證碼",
@@ -533,6 +603,76 @@ define({ "api": [
     }
   },
   {
+    "type": "get",
+    "url": "http://35.238.213.70:8081/accountorder/findAll",
+    "title": "查詢所有訂單",
+    "version": "3.1.0",
+    "name": "AccountOrderFindAll",
+    "group": "AccountOrder",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "code",
+            "description": "<p>狀態碼</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>设备状态</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>返回信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data",
+            "description": "<p>返回data</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"status\": 1,\n    \"msg\": \"请求成功\",\n    \"data\": [\n        {\n            \"id\": 4,\n            \"product\": \"w\",\n            \"account\": \"2\",\n            \"figure\": null,\n            \"shoptime\": \"2020/06/16 07:42:46\",\n            \"gender\": null,\n            \"age\": null,\n            \"img\": null,\n            \"type\": null,\n            \"price\": null\n        },\n        {\n            \"id\": 5,\n            \"product\": \"4\",\n            \"account\": \"2\",\n            \"figure\": null,\n            \"shoptime\": \"2020/06/16 07:42:51\",\n            \"gender\": null,\n            \"age\": null,\n            \"img\": null,\n            \"type\": null,\n            \"price\": null\n        }\n    ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/users.js",
+    "groupTitle": "AccountOrder",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RkNotFoundException",
+            "description": "<p>找不到相关数据</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": {\n      \"code\": 404,\n      \"msg\": \"\",\n      \"path\" \"\"\n  }\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "post",
     "url": "http://35.238.213.70:8081/accountorder/order",
     "title": "獲取用戶訂單",
@@ -627,38 +767,59 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "StringList",
+            "type": "String",
             "optional": false,
             "field": "account",
             "description": "<p>用戶名</p>"
           },
           {
             "group": "Parameter",
-            "type": "StringList",
+            "type": "String",
             "optional": false,
             "field": "product",
             "description": "<p>寵物名稱</p>"
           },
           {
             "group": "Parameter",
-            "type": "StringList",
+            "type": "String",
             "optional": false,
             "field": "figure",
             "description": "<p>寵物數量</p>"
           },
           {
             "group": "Parameter",
-            "type": "StringList",
+            "type": "String",
             "optional": false,
             "field": "age",
             "description": "<p>寵物年齡</p>"
           },
           {
             "group": "Parameter",
-            "type": "StringList",
+            "type": "String",
             "optional": false,
             "field": "gender",
             "description": "<p>寵物性別</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>寵物種類</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "img",
+            "description": "<p>寵物url</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "price",
+            "description": "<p>寵物價錢</p>"
           }
         ]
       }
@@ -812,76 +973,6 @@ define({ "api": [
     }
   },
   {
-    "type": "post",
-    "url": "http://35.238.213.70:8081/account/findAll",
-    "title": "查詢所有用戶data",
-    "version": "3.1.0",
-    "name": "SaveAccount",
-    "group": "Account",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "code",
-            "description": "<p>狀態碼</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "status",
-            "description": "<p>设备状态</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "msg",
-            "description": "<p>返回信息</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "data",
-            "description": "<p>返回data</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"status\": 1,\n    \"msg\": \"请求成功\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"email\": null,\n            \"username\": \"1\",\n            \"phone\": null,\n            \"password\": null,\n            \"cash\": null,\n            \"description\": null,\n            \"address\": null,\n            \"backgroudcolor\": null,\n            \"backgroudurl\": null,\n            \"avatar\": null,\n            \"power\": \"0\"\n        },\n        {\n            \"id\": 2,\n            \"email\": null,\n            \"username\": \"1\",\n            \"phone\": null,\n            \"password\": null,\n            \"cash\": null,\n            \"description\": null,\n            \"address\": null,\n            \"backgroudcolor\": null,\n            \"backgroudurl\": null,\n            \"avatar\": null,\n            \"power\": \"0\"\n        },\n        {\n            \"id\": 3,\n            \"email\": null,\n            \"username\": \"1\",\n            \"phone\": null,\n            \"password\": null,\n            \"cash\": null,\n            \"description\": null,\n            \"address\": null,\n            \"backgroudcolor\": null,\n            \"backgroudurl\": null,\n            \"avatar\": null,\n            \"power\": \"0\"\n        },\n        {\n            \"id\": 4,\n            \"email\": null,\n            \"username\": \"1\",\n            \"phone\": null,\n            \"password\": null,\n            \"cash\": null,\n            \"description\": null,\n            \"address\": null,\n            \"backgroudcolor\": null,\n            \"backgroudurl\": null,\n            \"avatar\": null,\n            \"power\": \"0\"\n        }\n    ]\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "routes/users.js",
-    "groupTitle": "Account",
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "RkNotFoundException",
-            "description": "<p>找不到相关数据</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": {\n      \"code\": 404,\n      \"msg\": \"\",\n      \"path\" \"\"\n  }\n}",
-          "type": "json"
-        }
-      ]
-    }
-  },
-  {
     "type": "put",
     "url": "http://35.238.213.70:8081/account/update",
     "title": "更新用戶資料",
@@ -974,6 +1065,13 @@ define({ "api": [
             "optional": false,
             "field": "power",
             "description": "<p>是否有管理員權限有為1無為0</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "bool",
+            "optional": false,
+            "field": "darktheme",
+            "description": "<p>黑色主題</p>"
           }
         ]
       }
@@ -1015,6 +1113,146 @@ define({ "api": [
         {
           "title": "Success-Response:",
           "content": "    HTTP/1.1 200 OK\n{\n   \"code\": 200,\n   \"status\": 1,\n   \"msg\": \"请求成功\",\n   \"data\": true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/users.js",
+    "groupTitle": "Account",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RkNotFoundException",
+            "description": "<p>找不到相关数据</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": {\n      \"code\": 404,\n      \"msg\": \"\",\n      \"path\" \"\"\n  }\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "http://35.238.213.70:8081/account/checkLikeNum",
+    "title": "查詢點贊商品",
+    "version": "3.1.0",
+    "name": "checkLikeNum",
+    "group": "Account",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "code",
+            "description": "<p>狀態碼</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>设备状态</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>返回信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data",
+            "description": "<p>返回bool</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"status\": 1,\n    \"msg\": \"请求成功\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"productid\": \"4\",\n            \"accountid\": \"5\"\n        }\n    ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/users.js",
+    "groupTitle": "Account",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RkNotFoundException",
+            "description": "<p>找不到相关数据</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": {\n      \"code\": 404,\n      \"msg\": \"\",\n      \"path\" \"\"\n  }\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "http://35.238.213.70:8081/account/checkLoveNum",
+    "title": "查詢喜歡商品",
+    "version": "3.1.0",
+    "name": "checkLoveNum",
+    "group": "Account",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "code",
+            "description": "<p>狀態碼</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>设备状态</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>返回信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data",
+            "description": "<p>返回bool</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"status\": 1,\n    \"msg\": \"请求成功\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"productid\": \"4\",\n            \"accountid\": \"5\"\n        }\n    ]\n}",
           "type": "json"
         }
       ]
@@ -1251,7 +1489,14 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "love",
-            "description": "<p>商品點贊跟love eg:10,20</p>"
+            "description": "<p>love</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "likenum",
+            "description": "<p>商品點贊</p>"
           },
           {
             "group": "Parameter",
@@ -1377,13 +1622,6 @@ define({ "api": [
             "optional": false,
             "field": "love",
             "description": "<p>商品點贊跟love eg:10,20</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "tag",
-            "description": "<p>商品標籤 eg:1,0,1,0,1,0,1,1</p>"
           }
         ]
       }
@@ -1425,6 +1663,172 @@ define({ "api": [
         {
           "title": "Success-Response:",
           "content": "    HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"status\": 1,\n    \"msg\": \"请求成功\",\n    \"data\": true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/users.js",
+    "groupTitle": "Product",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>SP语法出错、ACCESS数据库连接语句出错、文件引用与包含路径出错(如未启用父路径)、使用了服务器不支持的组件如FSO等</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 500 Not Found\n    {\n    \"code\": 500,\n    \"status\": 0,\n    \"msg\": \"錯誤消息\",\n    \"data\": null\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "http://35.238.213.70:8081/product/addLikeNum",
+    "title": "addLikeNum(LikeNum+1)",
+    "version": "3.1.0",
+    "name": "addLikeNum",
+    "group": "Product",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>商品id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "code",
+            "description": "<p>狀態碼</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>设备状态</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>返回信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data",
+            "description": "<p>商品信息</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"status\": 1,\n    \"msg\": \"请求成功\",\n    \"data\": \"5\" //目前數量\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/users.js",
+    "groupTitle": "Product",
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>SP语法出错、ACCESS数据库连接语句出错、文件引用与包含路径出错(如未启用父路径)、使用了服务器不支持的组件如FSO等</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "    HTTP/1.1 500 Not Found\n    {\n    \"code\": 500,\n    \"status\": 0,\n    \"msg\": \"錯誤消息\",\n    \"data\": null\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "http://35.238.213.70:8081/product/addLove",
+    "title": "addLove(發送請求該id的love+1)",
+    "version": "3.1.0",
+    "name": "addLove",
+    "group": "Product",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>商品id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "code",
+            "description": "<p>狀態碼</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>设备状态</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>返回信息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data",
+            "description": "<p>商品信息</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"status\": 1,\n    \"msg\": \"请求成功\",\n    \"data\": \"5\" //目前數量\n}",
           "type": "json"
         }
       ]
@@ -1597,7 +2001,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"status\": 1,\n    \"msg\": \"请求成功\",\n    \"data\": [\n        {\n            \"id\": 8,\n            \"product\": \"asq\",\n            \"account\": \"asdd\",\n            \"figure\": \"3\",\n            \"shoptime\": \"2020/04/08 02:38:27\",\n            \"gender\": null,\n            \"age\": null\n        },\n        {\n            \"id\": 9,\n            \"product\": \"asq\",\n            \"account\": \"asdd\",\n            \"figure\": \"3\",\n            \"shoptime\": \"2020/04/08 02:38:29\",\n            \"gender\": null,\n            \"age\": null\n        },\n        {\n            \"id\": 10,\n            \"product\": \"asq\",\n            \"account\": \"asdd\",\n            \"figure\": \"3\",\n            \"shoptime\": \"2020/04/08 02:38:59\",\n            \"gender\": null,\n            \"age\": null\n        },\n        {\n            \"id\": 11,\n            \"product\": \"asq\",\n            \"account\": \"asdd\",\n            \"figure\": \"3\",\n            \"shoptime\": \"2020/04/08 02:39:47\",\n            \"gender\": null,\n            \"age\": null\n        },\n        {\n            \"id\": 12,\n            \"product\": \"asq\",\n            \"account\": \"asdd\",\n            \"figure\": \"3\",\n            \"shoptime\": \"2020/04/08 02:41:22\",\n            \"gender\": null,\n            \"age\": null\n        },\n        {\n            \"id\": 13,\n            \"product\": \"asq\",\n            \"account\": \"asdd\",\n            \"figure\": \"3\",\n            \"shoptime\": \"2020/04/08 02:42:20\",\n            \"gender\": null,\n            \"age\": null\n        }\n    ]\n}",
+          "content": "    HTTP/1.1 200 OK\n {\n    \"code\": 200,\n    \"status\": 1,\n    \"msg\": \"请求成功\",\n    \"data\": [\n        {\n            \"id\": 4,\n            \"product\": \"w\",\n            \"account\": \"2\",\n            \"figure\": null,\n            \"shoptime\": \"2020/06/16 07:42:46\",\n            \"gender\": null,\n            \"age\": null,\n            \"img\": null,\n            \"type\": null,\n            \"price\": null\n        },\n        {\n            \"id\": 5,\n            \"product\": \"4\",\n            \"account\": \"2\",\n            \"figure\": null,\n            \"shoptime\": \"2020/06/16 07:42:51\",\n            \"gender\": null,\n            \"age\": null,\n            \"img\": null,\n            \"type\": null,\n            \"price\": null\n        }\n    ]\n}",
           "type": "json"
         }
       ]
@@ -1668,6 +2072,27 @@ define({ "api": [
             "optional": false,
             "field": "gender",
             "description": "<p>寵物性別</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>寵物種類</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "img",
+            "description": "<p>寵物url</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "price",
+            "description": "<p>寵物價錢</p>"
           }
         ]
       }

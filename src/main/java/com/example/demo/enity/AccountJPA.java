@@ -44,6 +44,9 @@ public class AccountJPA {
     @Column(name="power")
     private String power;
 
+    @Column(name="darktheme")
+    private boolean darktheme;
+
     public String getPower() {
         return power;
     }

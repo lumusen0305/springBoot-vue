@@ -51,7 +51,16 @@ public class AccountOrderController {
             return ResultUtil.success(result);
         }
     }
-
+    @GetMapping("/findAll")
+    public BaseResult<Object> findAll() {
+        List<AccountOrderJPA> result = null;
+        result = accountOrderRepository.findAll();
+        if(result.isEmpty()){
+            return ResultUtil.error("查詢失敗");
+        }else{
+            return ResultUtil.success(result);
+        }
+    }
     @PutMapping("/changeStatue")
     public BaseResult<Object> changeStatue(@RequestBody AccountOrderJPA accountOrderJPA) {
         AccountOrderJPA result = null;

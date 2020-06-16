@@ -17,7 +17,7 @@
  * @apiParam {String} backgroudcolor 背景顏色
  * @apiParam {String} backgroudurl 背景圖片url
  * @apiParam {String} power 是否有管理員權限有為1無為0
- * 
+ * @apiParam {bool} darktheme 黑色主題
  * @apiSuccess {String} code 狀態碼
  * @apiSuccess {Number} status 设备状态
  * @apiSuccess {Number} msg 返回信息
@@ -70,6 +70,68 @@
  *     }
  *
  */
+/**
+ *
+ * @api {get}http://35.238.213.70:8081/account/checkLoveNum 查詢喜歡商品
+ * @apiVersion 3.1.0
+ * @apiName checkLoveNum
+ * @apiGroup Account
+ *
+ * @apiSuccess {String} code 狀態碼
+ * @apiSuccess {Number} status 设备状态
+ * @apiSuccess {Number} msg 返回信息
+ * @apiSuccess {Number} data  返回bool
+
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "code": 200,
+    "status": 1,
+    "msg": "请求成功",
+    "data": [
+        {
+            "id": 1,
+            "productid": "4",
+            "accountid": "5"
+        }
+    ]
+}
+ *
+ * @apiUse RkNotFoundException
+ *
+ */
+/**
+ *
+ * @api {get}http://35.238.213.70:8081/account/checkLikeNum 查詢點贊商品
+ * @apiVersion 3.1.0
+ * @apiName checkLikeNum
+ * @apiGroup Account
+ *
+ * @apiSuccess {String} code 狀態碼
+ * @apiSuccess {Number} status 设备状态
+ * @apiSuccess {Number} msg 返回信息
+ * @apiSuccess {Number} data  返回bool
+
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "code": 200,
+    "status": 1,
+    "msg": "请求成功",
+    "data": [
+        {
+            "id": 1,
+            "productid": "4",
+            "accountid": "5"
+        }
+    ]
+}
+ *
+ * @apiUse RkNotFoundException
+ *
+ */
 
 /**
  *
@@ -105,9 +167,9 @@
 
 /**
  *
- * @api {post}http://35.238.213.70:8081/account/findAll 查詢所有用戶data
+ * @api {get}http://35.238.213.70:8081/account/findAll 查詢所有用戶data
  * @apiVersion 3.1.0
- * @apiName SaveAccount
+ * @apiName FindAll
  * @apiGroup Account
 
  * 
@@ -439,7 +501,8 @@
  * @apiParam {String}  category  商品種類
  * @apiParam {String}  name  商品名稱
  * @apiParam {String}  productdescription  商品描述
- * @apiParam {String}  love  商品點贊跟love eg:10,20
+ * @apiParam {String}  love  love 
+ * @apiParam {String}  likenum  商品點贊
  * @apiParam {String}  tag  商品標籤 eg:1,0,1,0,1,0,1,1
  * @apiSuccess {String} code 狀態碼
  * @apiSuccess {Number} status 设备状态
@@ -458,6 +521,57 @@
  * @apiUse 500Error
  *
  */
+/**
+ *
+ * @api {post}http://35.238.213.70:8081/product/addLove  addLove(發送請求該id的love+1)
+ * @apiVersion 3.1.0
+ * @apiName addLove
+ * @apiGroup Product
+ *
+ * @apiParam {int}  id  商品id
+ * @apiSuccess {String} code 狀態碼
+ * @apiSuccess {Number} status 设备状态
+ * @apiSuccess {Number} msg 返回信息
+ * @apiSuccess {Number} data  商品信息
+
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "code": 200,
+    "status": 1,
+    "msg": "请求成功",
+    "data": "5" //目前數量
+}
+ * @apiUse 500Error
+ *
+ */
+
+/**
+ *
+ * @api {post}http://35.238.213.70:8081/product/addLikeNum  addLikeNum(LikeNum+1)
+ * @apiVersion 3.1.0
+ * @apiName addLikeNum
+ * @apiGroup Product
+ *
+ * @apiParam {int}  id  商品id
+ * @apiSuccess {String} code 狀態碼
+ * @apiSuccess {Number} status 设备状态
+ * @apiSuccess {Number} msg 返回信息
+ * @apiSuccess {Number} data  商品信息
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "code": 200,
+    "status": 1,
+    "msg": "请求成功",
+    "data": "5" //目前數量
+}
+ * @apiUse 500Error
+ *
+ */
+
 /**
  *
  * @api {post}http://35.238.213.70:8081/product/addTag  添加標籤
@@ -497,7 +611,6 @@
  * @apiParam {String}  name  商品名稱
  * @apiParam {String}  productdescription  商品描述
  * @apiParam {String}  love  商品點贊跟love eg:10,20
- * @apiParam {String}  tag  商品標籤 eg:1,0,1,0,1,0,1,1
  * @apiSuccess {String} code 狀態碼
  * @apiSuccess {Number} status 设备状态
  * @apiSuccess {Number} msg 返回信息
@@ -533,64 +646,34 @@
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- * {
+ {
     "code": 200,
     "status": 1,
     "msg": "请求成功",
     "data": [
         {
-            "id": 8,
-            "product": "asq",
-            "account": "asdd",
-            "figure": "3",
-            "shoptime": "2020/04/08 02:38:27",
+            "id": 4,
+            "product": "w",
+            "account": "2",
+            "figure": null,
+            "shoptime": "2020/06/16 07:42:46",
             "gender": null,
-            "age": null
+            "age": null,
+            "img": null,
+            "type": null,
+            "price": null
         },
         {
-            "id": 9,
-            "product": "asq",
-            "account": "asdd",
-            "figure": "3",
-            "shoptime": "2020/04/08 02:38:29",
+            "id": 5,
+            "product": "4",
+            "account": "2",
+            "figure": null,
+            "shoptime": "2020/06/16 07:42:51",
             "gender": null,
-            "age": null
-        },
-        {
-            "id": 10,
-            "product": "asq",
-            "account": "asdd",
-            "figure": "3",
-            "shoptime": "2020/04/08 02:38:59",
-            "gender": null,
-            "age": null
-        },
-        {
-            "id": 11,
-            "product": "asq",
-            "account": "asdd",
-            "figure": "3",
-            "shoptime": "2020/04/08 02:39:47",
-            "gender": null,
-            "age": null
-        },
-        {
-            "id": 12,
-            "product": "asq",
-            "account": "asdd",
-            "figure": "3",
-            "shoptime": "2020/04/08 02:41:22",
-            "gender": null,
-            "age": null
-        },
-        {
-            "id": 13,
-            "product": "asq",
-            "account": "asdd",
-            "figure": "3",
-            "shoptime": "2020/04/08 02:42:20",
-            "gender": null,
-            "age": null
+            "age": null,
+            "img": null,
+            "type": null,
+            "price": null
         }
     ]
 }
@@ -611,6 +694,9 @@
  * @apiParam {String}  figure  寵物數量
  * @apiParam {String}  age  寵物年齡
  * @apiParam {String}  gender  寵物性別
+ * @apiParam {String}  type  寵物種類
+ * @apiParam {String}  img  寵物url
+ * @apiParam {String}  price  寵物價錢
  * @apiSuccess {String} code 狀態碼
  * @apiSuccess {Number} status 设备状态
  * @apiSuccess {Number} msg 返回信息
@@ -768,6 +854,60 @@
  * @apiUse 500Error
  *
  */
+
+
+/**
+ *
+ * @api {get}http://35.238.213.70:8081/accountorder/findAll 查詢所有訂單
+ * @apiVersion 3.1.0
+ * @apiName AccountOrderFindAll
+ * @apiGroup AccountOrder
+ * 
+ * @apiSuccess {String} code 狀態碼
+ * @apiSuccess {Number} status 设备状态
+ * @apiSuccess {Number} msg 返回信息
+ * @apiSuccess {Number} data  返回data
+
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+{
+    "code": 200,
+    "status": 1,
+    "msg": "请求成功",
+    "data": [
+        {
+            "id": 4,
+            "product": "w",
+            "account": "2",
+            "figure": null,
+            "shoptime": "2020/06/16 07:42:46",
+            "gender": null,
+            "age": null,
+            "img": null,
+            "type": null,
+            "price": null
+        },
+        {
+            "id": 5,
+            "product": "4",
+            "account": "2",
+            "figure": null,
+            "shoptime": "2020/06/16 07:42:51",
+            "gender": null,
+            "age": null,
+            "img": null,
+            "type": null,
+            "price": null
+        }
+    ]
+}
+ *
+ * @apiUse RkNotFoundException
+ *
+ */
+
+
 /**
  *
  * @api {post} http://35.238.213.70:8081/accountorder/save 添加用戶訂單
@@ -775,11 +915,14 @@
  * @apiName AccountOrderSave
  * @apiGroup AccountOrder
  *
- * @apiParam {StringList}  account  用戶名
- * @apiParam {StringList}  product  寵物名稱
- * @apiParam {StringList}  figure  寵物數量
- * @apiParam {StringList}  age  寵物年齡
- * @apiParam {StringList}  gender  寵物性別
+ * @apiParam {String}  account  用戶名
+ * @apiParam {String}  product  寵物名稱
+ * @apiParam {String}  figure  寵物數量
+ * @apiParam {String}  age  寵物年齡
+ * @apiParam {String}  gender  寵物性別
+ * @apiParam {String}  type  寵物種類
+ * @apiParam {String}  img  寵物url
+ * @apiParam {String}  price  寵物價錢
  * @apiSuccess {String} code 狀態碼
  * @apiSuccess {Number} status 设备状态
  * @apiSuccess {Number} msg 返回信息

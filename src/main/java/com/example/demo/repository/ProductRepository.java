@@ -13,6 +13,9 @@ public interface ProductRepository extends JpaRepository<ProductJPA, Integer> {
     @Query(value = "select * from product", nativeQuery = true)
     List<ProductJPA> findAllByNull();
 
-    @Query(value = "select * from tagmap ", nativeQuery = true)
-    List<TagMapJPA> findByProductId();
+//    @Query(value = "select * from tagmap ", nativeQuery = true)
+//    List<TagMapJPA> findByProductId();
+
+    @Query(value = "select * from product b where b.id=?1", nativeQuery = true)
+    ProductJPA findByProductId(int id);
 }

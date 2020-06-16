@@ -27,6 +27,39 @@ public class ShoppingCartJPA {
     @Column(name = "age")
     private String age;
 
+    @Column(name = "img")
+    private String img;
+
+    @Column(name = "type")
+    private String type;
+
+    @Column(name = "price")
+    private String price;
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     public String getGender() {
         return gender;
     }

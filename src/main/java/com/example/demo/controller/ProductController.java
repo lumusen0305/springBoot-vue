@@ -2,10 +2,9 @@ package com.example.demo.controller;
 import com.alibaba.fastjson.JSON;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.demo.enity.BaseResult;
-import com.example.demo.enity.ProductJPA;
-import com.example.demo.enity.ResultUtil;
-import com.example.demo.enity.TagMapJPA;
+import com.example.demo.enity.*;
+import com.example.demo.repository.LikeTagRespository;
+import com.example.demo.repository.LoveTagRespository;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.repository.TagMapRepository;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -15,15 +14,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.json.JSONArray;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/product")
 public class ProductController {
-
+    @Autowired
+    LoveTagRespository loveTagRespository;
+    @Autowired
+    LikeTagRespository likeTagRespository;
     @Autowired
     ProductRepository productRepository;
     @Autowired
@@ -74,6 +80,32 @@ public class ProductController {
             return ResultUtil.success(true);
         }else{
             return ResultUtil.error("商品註冊失敗");
+        }
+    }
+    @PutMapping("/addLove")
+    public BaseResult<Object> addLove(@CookieValue(value = "userID") String userid, @RequestBody ProductJPA productJPA){
+        ProductJPA result = productRepository.findByProductId(productJPA.getId());
+        LoveTagJPA loveTagJPA = new LoveTagJPA(Integer.toString(productJPA.getId()),userid);
+        loveTagRespository.save(loveTagJPA);
+        result.setLove(Integer.toString(Integer.valueOf(result.getLove())+1));
+        productRepository.save(result);
+        if(result != null){
+            return ResultUtil.success(result.getLove());
+        }else{
+            return ResultUtil.error("商品點贊失敗");
+        }
+    }
+    @PutMapping("/addLikeNum")
+    public BaseResult<Object> likeNum(@CookieValue(value = "userID") String userid,@RequestBody ProductJPA productJPA){
+        ProductJPA result = productRepository.findByProductId(productJPA.getId());
+        LikeTagJPA likeTagJPA = new LikeTagJPA(Integer.toString(productJPA.getId()),userid);
+        likeTagRespository.save(likeTagJPA);
+        result.setLikenum(Integer.toString(Integer.valueOf(result.getLikenum()+1)));
+        productRepository.save(result);
+        if(result != null){
+            return ResultUtil.success(result.getLove());
+        }else{
+            return ResultUtil.error("商品點贊失敗");
         }
     }
     class tempPojo{

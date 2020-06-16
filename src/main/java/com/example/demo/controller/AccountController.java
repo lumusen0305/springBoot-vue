@@ -1,11 +1,10 @@
 package com.example.demo.controller;
 import javax.servlet.http.Cookie;
 
-import com.example.demo.enity.AccountJPA;
-import com.example.demo.enity.BaseResult;
-import com.example.demo.enity.Captcha;
-import com.example.demo.enity.ResultUtil;
+import com.example.demo.enity.*;
 import com.example.demo.repository.AccountRepository;
+import com.example.demo.repository.LikeTagRespository;
+import com.example.demo.repository.LoveTagRespository;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +23,11 @@ public class AccountController extends email{
     @Autowired
     AccountRepository accountRepository;
 
+    @Autowired
+    LikeTagRespository likeTagRespository;
+
+    @Autowired
+    LoveTagRespository loveTagRespository;
     @Autowired
     DataSource dataSource;
 
@@ -44,6 +48,28 @@ public class AccountController extends email{
             return ResultUtil.success(result);
         }
 
+    }
+    @GetMapping("/checkLikeNum")
+    public BaseResult<Object> checkLikeNum(@CookieValue(value = "userID") String userid){
+        List<LikeTagJPA> result = null;
+        result =likeTagRespository.findById(userid);
+        if(result.size()==0){
+            return ResultUtil.success(result);
+        }else{
+            return ResultUtil.success(result);
+        }
+    }
+
+    @GetMapping("/checkLoveNum")
+    public BaseResult<Object> checkLoveNum(@CookieValue(value = "userID") String userid){
+        List<LoveTagJPA> result = null;
+        result =loveTagRespository.findById(userid);
+        System.out.println(userid);
+        if(result.size()==0){
+            return ResultUtil.success(result);
+        }else{
+            return ResultUtil.success(result);
+        }
     }
     @PostMapping("/checkUsername")
     public BaseResult<Object> checkUsername(@RequestBody AccountJPA accountJPA) throws JSONException {
