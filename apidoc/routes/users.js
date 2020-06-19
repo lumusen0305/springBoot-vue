@@ -76,7 +76,7 @@
  * @apiVersion 3.1.0
  * @apiName checkLoveNum
  * @apiGroup Account
- *
+  * @apiParam {Int}  id  用戶id
  * @apiSuccess {String} code 狀態碼
  * @apiSuccess {Number} status 设备状态
  * @apiSuccess {Number} msg 返回信息
@@ -108,6 +108,7 @@
  * @apiName checkLikeNum
  * @apiGroup Account
  *
+ * @apiParam {Int}  id  用戶id
  * @apiSuccess {String} code 狀態碼
  * @apiSuccess {Number} status 设备状态
  * @apiSuccess {Number} msg 返回信息
@@ -283,24 +284,24 @@
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *{
+{
     "code": 200,
     "status": 1,
     "msg": "请求成功",
     "data": [
         {
-            "id": 2,
-            "email": "csu_ds_ys@163.com",
-            "username": "Lumusen",
-            "phone": "666-666-666",
-            "password": "123456",
+            "id": 26,
+            "email": "fh831.cp9gw@gmail.com",
+            "username": "Huang",
+            "phone": "18673222222",
+            "password": "gggggg",
             "cash": null,
             "description": null,
             "address": null,
             "backgroudcolor": null,
             "backgroudurl": null,
             "avatar": null,
-            "power": null
+            "power": "0"
         }
     ]
 }
@@ -503,7 +504,6 @@
  * @apiParam {String}  productdescription  商品描述
  * @apiParam {String}  love  love 
  * @apiParam {String}  likenum  商品點贊
- * @apiParam {String}  tag  商品標籤 eg:1,0,1,0,1,0,1,1
  * @apiSuccess {String} code 狀態碼
  * @apiSuccess {Number} status 设备状态
  * @apiSuccess {Number} msg 返回信息
@@ -528,7 +528,8 @@
  * @apiName addLove
  * @apiGroup Product
  *
- * @apiParam {int}  id  商品id
+ * @apiParam {String}  productid  商品id
+ * @apiParam {String}  accountid  用戶id
  * @apiSuccess {String} code 狀態碼
  * @apiSuccess {Number} status 设备状态
  * @apiSuccess {Number} msg 返回信息
@@ -554,7 +555,8 @@
  * @apiName addLikeNum
  * @apiGroup Product
  *
- * @apiParam {int}  id  商品id
+ * @apiParam {String}  productid  商品id
+ * @apiParam {String}  accountid  用戶id
  * @apiSuccess {String} code 狀態碼
  * @apiSuccess {Number} status 设备状态
  * @apiSuccess {Number} msg 返回信息
@@ -605,6 +607,7 @@
  * @apiName UpdateSave
  * @apiGroup Product
  *
+ * @apiParam {Int}  id  商品id
  * @apiParam {String}  money  商品價位
  * @apiParam {String}  url  商品圖片
  * @apiParam {String}  category  商品種類
@@ -637,7 +640,7 @@
  * @apiName ShoppingCartOrder
  * @apiGroup ShoppingCart
  *
- * @apiParam {String}  username  用戶名
+ * @apiParam {String}  account  用戶名
  * @apiSuccess {String} code 狀態碼
  * @apiSuccess {Number} status 设备状态
  * @apiSuccess {Number} msg 返回信息
@@ -717,16 +720,20 @@
 
 /**
  *
- * @api {put}http://35.238.213.70:8081/shoppingcart/update  新增購物車
+ * @api {put}http://35.238.213.70:8081/shoppingcart/update  更改購物車
  * @apiVersion 3.1.0
  * @apiName ShoppingCartUpdate
  * @apiGroup ShoppingCart
  *
+ * @apiParam {Int}  id  用戶id
  * @apiParam {String}  account  用戶名
  * @apiParam {String}  product  寵物名稱
  * @apiParam {String}  figure  寵物數量
  * @apiParam {String}  age  寵物年齡
  * @apiParam {String}  gender  寵物性別
+ * @apiParam {String}  type  寵物種類
+ * @apiParam {String}  img  寵物url
+ * @apiParam {String}  price  寵物價錢
  * @apiSuccess {String} code 狀態碼
  * @apiSuccess {Number} status 设备状态
  * @apiSuccess {Number} msg 返回信息
@@ -780,7 +787,7 @@
  * @apiName AccountOrderOrder
  * @apiGroup AccountOrder
  *
- * @apiParam {String}  username  用戶名
+ * @apiParam {String}  account  用戶名
  * @apiSuccess {String} code 狀態碼
  * @apiSuccess {Number} status 设备状态
  * @apiSuccess {Number} msg 返回信息
@@ -941,13 +948,13 @@
 
 /**
  *
- * @api {post} http://35.238.213.70:8081/accountorder/changeStatue 修改訂單狀態
+ * @api {put} http://35.238.213.70:8081/accountorder/changeStatue 修改訂單狀態
  * @apiVersion 3.1.0
  * @apiName AccountOrderChangeStatue
  * @apiGroup AccountOrder
  *
  * @apiParam {int}  id  訂單號
- * @apiParam {int}  orderstatue  訂單狀態
+ * @apiParam {String}  orderstatue  訂單狀態
  * @apiSuccess {String} code 狀態碼
  * @apiSuccess {Number} status 设备状态
  * @apiSuccess {Number} msg 返回信息

@@ -46,7 +46,7 @@ public class AccountOrderController {
         List<AccountOrderJPA> result = null;
         result = accountOrderRepository.findByAccount(accountOrderJPA.getAccount());
         if(result.isEmpty()){
-            return ResultUtil.error("查詢失敗");
+            return ResultUtil.cannotFind(result);
         }else{
             return ResultUtil.success(result);
         }
@@ -56,7 +56,7 @@ public class AccountOrderController {
         List<AccountOrderJPA> result = null;
         result = accountOrderRepository.findAll();
         if(result.isEmpty()){
-            return ResultUtil.error("查詢失敗");
+            return ResultUtil.success(result);
         }else{
             return ResultUtil.success(result);
         }

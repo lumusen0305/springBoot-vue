@@ -485,7 +485,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"status\": 1,\n    \"msg\": \"请求成功\",\n    \"data\": [\n        {\n            \"id\": 2,\n            \"email\": \"csu_ds_ys@163.com\",\n            \"username\": \"Lumusen\",\n            \"phone\": \"666-666-666\",\n            \"password\": \"123456\",\n            \"cash\": null,\n            \"description\": null,\n            \"address\": null,\n            \"backgroudcolor\": null,\n            \"backgroudurl\": null,\n            \"avatar\": null,\n            \"power\": null\n        }\n    ]\n}",
+          "content": "    HTTP/1.1 200 OK\n{\n    \"code\": 200,\n    \"status\": 1,\n    \"msg\": \"请求成功\",\n    \"data\": [\n        {\n            \"id\": 26,\n            \"email\": \"fh831.cp9gw@gmail.com\",\n            \"username\": \"Huang\",\n            \"phone\": \"18673222222\",\n            \"password\": \"gggggg\",\n            \"cash\": null,\n            \"description\": null,\n            \"address\": null,\n            \"backgroudcolor\": null,\n            \"backgroudurl\": null,\n            \"avatar\": null,\n            \"power\": \"0\"\n        }\n    ]\n}",
           "type": "json"
         }
       ]
@@ -513,7 +513,7 @@
     }
   },
   {
-    "type": "post",
+    "type": "put",
     "url": "http://35.238.213.70:8081/accountorder/changeStatue",
     "title": "修改訂單狀態",
     "version": "3.1.0",
@@ -531,7 +531,7 @@
           },
           {
             "group": "Parameter",
-            "type": "int",
+            "type": "String",
             "optional": false,
             "field": "orderstatue",
             "description": "<p>訂單狀態</p>"
@@ -686,7 +686,7 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "username",
+            "field": "account",
             "description": "<p>用戶名</p>"
           }
         ]
@@ -1146,6 +1146,19 @@
     "version": "3.1.0",
     "name": "checkLikeNum",
     "group": "Account",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>用戶id</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -1216,6 +1229,19 @@
     "version": "3.1.0",
     "name": "checkLoveNum",
     "group": "Account",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>用戶id</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -1497,13 +1523,6 @@
             "optional": false,
             "field": "likenum",
             "description": "<p>商品點贊</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "tag",
-            "description": "<p>商品標籤 eg:1,0,1,0,1,0,1,1</p>"
           }
         ]
       }
@@ -1581,6 +1600,13 @@
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>商品id</p>"
+          },
           {
             "group": "Parameter",
             "type": "String",
@@ -1701,10 +1727,17 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "int",
+            "type": "String",
             "optional": false,
-            "field": "id",
+            "field": "productid",
             "description": "<p>商品id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "accountid",
+            "description": "<p>用戶id</p>"
           }
         ]
       }
@@ -1784,10 +1817,17 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "int",
+            "type": "String",
             "optional": false,
-            "field": "id",
+            "field": "productid",
             "description": "<p>商品id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "accountid",
+            "description": "<p>用戶id</p>"
           }
         ]
       }
@@ -1959,7 +1999,7 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "username",
+            "field": "account",
             "description": "<p>用戶名</p>"
           }
         ]
@@ -2163,13 +2203,20 @@
   {
     "type": "put",
     "url": "http://35.238.213.70:8081/shoppingcart/update",
-    "title": "新增購物車",
+    "title": "更改購物車",
     "version": "3.1.0",
     "name": "ShoppingCartUpdate",
     "group": "ShoppingCart",
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>用戶id</p>"
+          },
           {
             "group": "Parameter",
             "type": "String",
@@ -2204,6 +2251,27 @@
             "optional": false,
             "field": "gender",
             "description": "<p>寵物性別</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>寵物種類</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "img",
+            "description": "<p>寵物url</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "price",
+            "description": "<p>寵物價錢</p>"
           }
         ]
       }

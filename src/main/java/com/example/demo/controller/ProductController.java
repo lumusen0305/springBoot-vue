@@ -82,10 +82,10 @@ public class ProductController {
             return ResultUtil.error("商品註冊失敗");
         }
     }
-    @PutMapping("/addLove")
-    public BaseResult<Object> addLove(@CookieValue(value = "userID") String userid, @RequestBody ProductJPA productJPA){
-        ProductJPA result = productRepository.findByProductId(productJPA.getId());
-        LoveTagJPA loveTagJPA = new LoveTagJPA(Integer.toString(productJPA.getId()),userid);
+    @PostMapping("/addLove")
+    public BaseResult<Object> addLove(@RequestBody LoveTagJPA likeTagJPA){
+        ProductJPA result = productRepository.findByProductId(Integer.valueOf(likeTagJPA.getProductid()));
+        LoveTagJPA loveTagJPA = new LoveTagJPA(likeTagJPA.getAccountid(),(likeTagJPA.getProductid()));
         loveTagRespository.save(loveTagJPA);
         result.setLove(Integer.toString(Integer.valueOf(result.getLove())+1));
         productRepository.save(result);
@@ -95,11 +95,11 @@ public class ProductController {
             return ResultUtil.error("商品點贊失敗");
         }
     }
-    @PutMapping("/addLikeNum")
-    public BaseResult<Object> likeNum(@CookieValue(value = "userID") String userid,@RequestBody ProductJPA productJPA){
-        ProductJPA result = productRepository.findByProductId(productJPA.getId());
-        LikeTagJPA likeTagJPA = new LikeTagJPA(Integer.toString(productJPA.getId()),userid);
-        likeTagRespository.save(likeTagJPA);
+    @PostMapping("/addLikeNum")
+    public BaseResult<Object> likeNum(@RequestBody LikeTagJPA likeTagJPA){
+        ProductJPA result = productRepository.findByProductId(Integer.valueOf(likeTagJPA.getProductid()));
+        LikeTagJPA likeTagJPAresult = new LikeTagJPA(likeTagJPA.getProductid(),likeTagJPA.getAccountid());
+        likeTagRespository.save(likeTagJPAresult);
         result.setLikenum(Integer.toString(Integer.valueOf(result.getLikenum()+1)));
         productRepository.save(result);
         if(result != null){

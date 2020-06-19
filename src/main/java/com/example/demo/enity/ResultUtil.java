@@ -1,5 +1,7 @@
 package com.example.demo.enity;
 
+import java.util.List;
+
 public class ResultUtil {
     public static <T> BaseResult<T> success(T data) {
         return commonResult(1, 200, "请求成功", data);
@@ -20,5 +22,9 @@ public class ResultUtil {
         result.setMsg(errMsg);
         result.setData(data);
         return result;
+    }
+
+    public static <T> BaseResult<Object> cannotFind(T data) {
+        return commonResult(1, 200, "沒有data請添加數據", data);
     }
 }

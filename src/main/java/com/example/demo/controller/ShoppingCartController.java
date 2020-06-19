@@ -33,7 +33,7 @@ public class ShoppingCartController {
         result = shoppingCartRepository.findByAccount(shoppingCartJPA.getAccount());
 
         if (result.isEmpty()) {
-            return ResultUtil.error("查詢失敗");
+            return ResultUtil.cannotFind(result);
         } else {
             return ResultUtil.success(result);
         }

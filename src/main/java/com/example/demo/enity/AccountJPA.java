@@ -47,6 +47,14 @@ public class AccountJPA {
     @Column(name="darktheme")
     private boolean darktheme;
 
+    public boolean isDarktheme() {
+        return darktheme;
+    }
+
+    public void setDarktheme(boolean darktheme) {
+        this.darktheme = darktheme;
+    }
+
     public String getPower() {
         return power;
     }

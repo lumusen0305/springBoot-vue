@@ -50,9 +50,9 @@ public class AccountController extends email{
 
     }
     @GetMapping("/checkLikeNum")
-    public BaseResult<Object> checkLikeNum(@CookieValue(value = "userID") String userid){
+    public BaseResult<Object> checkLikeNum(@RequestBody AccountJPA accountJPA){
         List<LikeTagJPA> result = null;
-        result =likeTagRespository.findById(userid);
+        result =likeTagRespository.findById(Integer.toString(accountJPA.getId()));
         if(result.size()==0){
             return ResultUtil.success(result);
         }else{
@@ -61,10 +61,9 @@ public class AccountController extends email{
     }
 
     @GetMapping("/checkLoveNum")
-    public BaseResult<Object> checkLoveNum(@CookieValue(value = "userID") String userid){
+    public BaseResult<Object> checkLoveNum(@RequestBody AccountJPA accountJPA){
         List<LoveTagJPA> result = null;
-        result =loveTagRespository.findById(userid);
-        System.out.println(userid);
+        result =loveTagRespository.findById(Integer.toString(accountJPA.getId()));
         if(result.size()==0){
             return ResultUtil.success(result);
         }else{
@@ -120,6 +119,7 @@ public class AccountController extends email{
     @PostMapping("/save")
     public BaseResult<Boolean> save(@RequestBody AccountJPA accountJPA){
         accountJPA.setPower("0");
+        accountJPA.setDarktheme(false);
         AccountJPA result = accountRepository.save(accountJPA);
         if(result != null){
             return ResultUtil.success(true);
