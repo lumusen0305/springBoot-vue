@@ -54,20 +54,4 @@
 
 - spring-boot-starter-data-jpa
 
-## API:(我只列出幾個root)
-
-+ 用戶動作：
-
-  http://localhost:8081/account
-
-+ 購物車：
-
-  http://localhost:8081/shoppingcart
-
-+ 購物清單：
-
-  http://localhost:8081/accountorder
-
-+ 商品：
-
-  http://localhost:8081/product
+## API:請看[APIdoc](https://github.com/lumusen0305/springBoot-vue/tree/master/apidoc)
